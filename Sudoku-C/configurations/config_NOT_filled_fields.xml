@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<configuration>
+
+     <default name = "">
+        <algorithm> </algorithm>
+	<difficulty> </difficulty>
+        <solver_output_type> </solver_output_type>
+	<path_output> </path_output>
+      </default>
+      <levels>
+	 <level id ="0" name="Easy" min = "40" max = "45"></level>
+         <level id ="1" name="Medium" min = "46" max = "49"></level>
+         <level id ="2" name="Hard" min = "50" max = "58"></level>
+      </levels>
+
+</configuration>
