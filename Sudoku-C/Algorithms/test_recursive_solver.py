@@ -2,11 +2,10 @@
 Created on Jul 07, 2013
 @author: Rafael Alfaro
 '''
-
 import unittest
-import recursive_solver
+import recursive
 
-class TestRecursive_solver(unittest.TestCase):
+class Testrecursive(unittest.TestCase):
 
     def setUp(self):
         self.board_easy = "040000700000700001005021006000800900600002003030005008301640000000050000006008200"
@@ -35,42 +34,42 @@ class TestRecursive_solver(unittest.TestCase):
 
 
     def test_load_puzzle(self):
-        sudoku = recursive_solver.Recursive_solver(self.board_easy)
+        sudoku = recursive.Recursive(self.board_easy)
         matrix_out = sudoku.load_puzzle(self.board_easy)
         self.assertEqual(self.matrix,matrix_out)
 
 
     def test_get_time(self):
-        sudoku = recursive_solver.Recursive_solver(self.board_easy)
+        sudoku = recursive.Recursive(self.board_easy)
         time_review = sudoku.get_time()
         sudoku.solve_one_sudoku()
         self.assertNotEqual(time_review,sudoku.get_time())
 
     def test_get_original(self):
-        sudoku = recursive_solver.Recursive_solver(self.board_easy)
+        sudoku = recursive.Recursive(self.board_easy)
         self.assertEqual(self.board_easy,sudoku.get_original())
 
     def test_solve_one_sudoku(self):
-        sudoku = recursive_solver.Recursive_solver(self.board_easy)
+        sudoku = recursive.Recursive(self.board_easy)
         self.assertEqual(self.board_easy_sl,sudoku.solve_one_sudoku())
 
     def test_find_empty_position(self):
-        sudoku = recursive_solver.Recursive_solver(self.board_easy)
+        sudoku = recursive.Recursive(self.board_easy)
         tupla = sudoku.find_empty_position(self.board_easy,'0')
         self.assertEqual((0,0),tupla)
 
     def test_matrix_to_string(self):
-       sudoku = recursive_solver.Recursive_solver(self.board_easy)
+       sudoku = recursive.Recursive(self.board_easy)
        str_out = sudoku.matrix_to_string(self.matrix)
        self.assertEqual(self.board_easy,str_out)
 
     def test_get_solution(self):
-      sudoku = recursive_solver.Recursive_solver(self.board_easy)
+      sudoku = recursive.Recursive(self.board_easy)
       sudoku.solve_one_sudoku()
       self.assertEqual(self.board_easy_sl,sudoku.get_solution())
 
     def test_solve(self):
-        sudoku = recursive_solver.Recursive_solver(self.board_easy)
+        sudoku = recursive.Recursive(self.board_easy)
         solution = sudoku.solve(self.matrix,'0')
         self.assertEqual(solution,self.matrix_sl)
 

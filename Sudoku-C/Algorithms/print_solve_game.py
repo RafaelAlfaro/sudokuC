@@ -1,51 +1,43 @@
-#Module 2/5:
 import time
-
-
 class PrintSolveGame:
     def __init__(self):
         self.sudoku_resolved_string = ""
         self.time = 0.0
-        
     
     def print_solve(self, sudoku, asignadas):
         """
         it generates the sudoku resolved string
-        the commented variables in this method is in case we would like to print it from here
+        The commented variables in this method are in case we would like to print the resolved 
+        sudoku directly to the console
         sudoku is a sudoku matrix to be resolved
         """
-        COLUMNAS = len(sudoku[0])
-        barra = ""
+        max_col = len(sudoku[0])
+        bar = ""
 
-        for i in range(0,COLUMNAS):
-            barra += "?---"
-        barra += "."
+        for i in range(0,max_col):
+            bar += "?---"
+        bar += "."
+        string_temp = ""
         
-        #print barra
-        cadena_temp= ""
-        
-        for row in range(0,len(sudoku)):
-            cadena = ""
-            for columna in range(0,len(sudoku)):
+        for row in range(0, len(sudoku)):
+            string_to_print = ""
+            for columna in range(0, len(sudoku)):
                 if sudoku[row][columna] == 0:
                     encontrado = False
                     for a in asignadas:
                         if a[0] == row and a[1] == columna:
-                            cadena += "| "+ str(a[2]) + " "
+                            string_to_print += "| "+ str(a[2]) + " "
                             
                             encontrado = True
                     if not encontrado:
-                        cadena += "|"+"   "
+                        string_to_print += "|"+"   "
                 else:
-                    cadena += "| "+str(sudoku[row][columna])+" "
-            cadena += "|"
-            cadena_temp= cadena_temp+ cadena
-            #print barra
-        
+                    string_to_print += "| "+str(sudoku[row][columna])+" "
+            string_to_print += "|"
+            string_temp = string_temp+ string_to_print
         temp_list = ""
         
-        for cad in cadena_temp:
-            #print cad
+        for cad in string_temp:
             if cad == "|" or cad == " " or cad == "| " or cad == "   ":
                 temp_list = temp_list + cad 
             else:
@@ -53,8 +45,13 @@ class PrintSolveGame:
         self.time = time.clock()
         
     def get_sudoku_resolved(self):
-        """it returns the sudoku resolved as a single string"""
+        """
+        it returns the sudoku resolved as a single string
+        """
         return self.sudoku_resolved_string
     
     def get_time(self):
-        return self.time
+        """
+        it returns the time
+        """
+        return(self.time)

@@ -1,53 +1,79 @@
-#Module 1/5:
-
 class Position:
-    """It manage a position, and it controls the increase"""
-    def __init__(self,maxrow,maxcol):
-        self.maxrow = maxrow
-        self.maxcol = maxcol
+    """
+    It manage a position, and it controls the increase
+    """
+    def __init__(self, max_row, max_col):
+        self.max_row = max_row
+        self.max_col = max_col
         self.row = 0
         self.col = 0
 
     def setRow(self, row):
+        """
+        it set a row
+        row is a variable in order to set the new row
+        """
         if row < 0:
             self.row = 0
-        elif row >= self.maxrow:
+        elif row >= self.max_row:
             self.row = -1
         else:
             self.row = row
 
     def setCol(self, col):
+        """
+        it set a column
+        col is a variable in order to set the new column
+        """
         if col < 0:
             self.col = 0
-        elif col >= self.maxcol:
+        elif col >= self.max_col:
             self.col = -1
         else:
             self.col = col
 
     def getRow(self):
+        """
+        it returns the current row
+        """
         return self.row
 
     def getCol(self):
+        """
+        it returns the current column
+        """
         return self.col
 
-    def fin(self):
+    def end_matrix(self):
+        """
+        it verifies the end of the matrix, it means it could not pass the 
+        max row and max column
+        """
         return self.row == -1 and self.col == -1
 
     def reset(self):
+        """
+        it reset the row to zero and column to zero
+        """
         self.row = 0
         self.col = 0
 
     def sig(self):
-        # Incrementa la posici?n controlando que no se pasa
-        # del final.
-        if not self.fin():
+        """
+        it increase the position in order to go next position
+        but it should not be more than end max_row and end max_col
+        """
+        if not self.end_matrix():
             self.col += 1
-            if self.col == self.maxcol:
+            if self.col == self.max_col:
                 self.col = 0
-                self.row +=1
-                if self.row == self.maxrow:
+                self.row += 1
+                if self.row == self.max_row:
                     self.row = -1
                     self.col = -1
 
     def getPos(self):
-        return [self.row, self.col]
+        """
+        it returns the current position
+        """
+        return([self.row, self.col])

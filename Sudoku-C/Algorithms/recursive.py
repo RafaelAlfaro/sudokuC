@@ -3,14 +3,14 @@ Created on Jul 07, 2013
 @author: Rafael Alfaro
 '''
 import time
-class Recursive_solver:
-    def __init__(self,board,chr_empty = '0'):
+class Recursive:
+    def __init__(self, board, chr_empty = '0'):
         self.board = board
-        self.chr_empty= chr_empty
+        self.chr_empty = chr_empty
         self.time = 0.0
-        self.solution =""
+        self.solution = ""
 
-    def load_puzzle(self , puzzle):
+    def load_puzzle(self, puzzle):
         digits = list(puzzle)
         grid = self.group(digits, 9)
         return grid
@@ -50,14 +50,14 @@ class Recursive_solver:
         ri, ci = pos
         return grid[ri]
 
-    def get_col(self,grid, pos):
+    def get_col(self, grid, pos):
         """
         It is a private method to get the column
         """
         ri, ci = pos
         return [grid[ri][ci] for ri in range(9)]
 
-    def get_block(self,grid, pos):
+    def get_block(self, grid, pos):
         """
         It is a private method to get a block form matrix
         """
@@ -75,7 +75,7 @@ class Recursive_solver:
             - set(self.get_col(grid, pos)) \
             - set(self.get_block(grid, pos))
 
-    def solve(self, grid , chr_empty):
+    def solve(self, grid, chr_empty):
         """
         It is a private method to solve the puzzle
         """
@@ -86,9 +86,9 @@ class Recursive_solver:
         ri, ci = pos
         for n in self.find_possible_values(grid, pos):
             grid[ri][ci] = n
-            soln = self.solve(grid,chr_empty)
-            if soln:
-                return soln
+            solution = self.solve(grid,chr_empty)
+            if solution:
+                return solution
         grid[ri][ci] = chr_empty
 
     def group(self, xs, n):
@@ -101,7 +101,7 @@ class Recursive_solver:
         """
         This method display the puzzle
         """
-        print "\n".join("".join(row) for row in grid)
+        print("\n".join("".join(row) for row in grid))
 
 
     def matrix_to_string(self, values):

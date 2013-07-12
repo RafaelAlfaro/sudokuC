@@ -4,9 +4,9 @@ Created on Jul 07, 2013
          Gustavo Ramirez
          Carla Munoz
 '''
-import recursive_solver
-import peter_norving_algoritmo
-import stringsk
+import recursive
+import peter_algorithm
+import sudokustr
 from resolve import Resolve
 
 class Solver:
@@ -50,32 +50,33 @@ class Solver:
         This method uses the algorithm specified to solve the game
         """
         if(algorithm =="recursive"):
-            board = stringsk.Stringsk(puzzle)
+            board = sudokustr.SudokuStr(puzzle)
             if(board.verify_string_to_sudoku()):
                 self.original = board.get_str()
                 puzzle = board.get_str()
-                recursivesk = recursive_solver.Recursive_solver(puzzle)
+                recursivesk = recursive.Recursive(puzzle)
                 self.solution=recursivesk.solve_one_sudoku()
                 self.solve_time = recursivesk.get_time()
                 print(self.human_string(self.solution))
                 print self.solve_time
 
         elif (algorithm =="peter"):
-            board = stringsk.Stringsk(puzzle)
+            board = sudokustr.SudokuStr(puzzle)
             if(board.verify_string_to_sudoku()):
                 self.original = board.get_str()
                 puzzle = board.get_str()
-                petersk = peter_norving_algoritmo.peter_norving_algoritmo()
-                self.solution = petersk.resolvedor(puzzle)
+                petersk = peter_algorithm.peter_algorithm()
+                self.solution = petersk.game_solution(puzzle)
                 self.solve_time = petersk.get_time()
                 print(self.human_string(self.solution))
                 print self.solve_time
+
 
         elif (algorithm =="bactracking"):
             """
             This implements the backtrack algorithm in order to solve the game
             """
-            board = stringsk.Stringsk(puzzle)
+            board = sudokustr.SudokuStr(puzzle)
             if(board.verify_string_to_sudoku()):
                 self.original = board.get_str()
                 puzzle = board.get_str()
