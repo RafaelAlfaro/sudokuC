@@ -11,8 +11,8 @@ class TestPeterAlgorithm(unittest.TestCase):
         self.game_dictionary_solved = {'B8': '9', 'H1': '4', 'C7': '8', 'B3': '8', 'D3': '6', 'G9': '5', 'G8': '8', 'B9': '7', 'A3': '9', 'G7': '2', 'G6': '6', 'G5': '7', 'G4': '4', 'G3': '1', 'G2': '3', 'G1': '9', 'B5': '1', 'I1': '2', 'I3': '7', 'I2': '8', 'I5': '5', 'I4': '1', 'I7': '6', 'I6': '3', 'A1': '3', 'C9': '6', 'C8': '3', 'A5': '6', 'E8': '6', 'A7': '1', 'A6': '7', 'E5': '3', 'C2': '1', 'C1': '7', 'E6': '1', 'E1': '5', 'A2': '5', 'C5': '4', 'A4': '8', 'I9': '9', 'B2': '4', 'I8': '4', 'H2': '6', 'D9': '1', 'F2': '9', 'D5': '2', 'C3': '2', 'A9': '4', 'C6': '9', 'E4': '7', 'B1': '6', 'E7': '9', 'F1': '1', 'H8': '1', 'H9': '3', 'F4': '6', 'F5': '8', 'F6': '5', 'F7': '4', 'F8': '7', 'H3': '5', 'F3': '3', 'H6': '8', 'H7': '7', 'H4': '2', 'H5': '9', 'B4': '3', 'A8': '2', 'B6': '2', 'B7': '5', 'E9': '8', 'E3': '4', 'D8': '5', 'F9': '2', 'D6': '4', 'D7': '3', 'D4': '9', 'C4': '5', 'D2': '7', 'E2': '2', 'D1': '8'}
         self.new_instance = peter_algorithm()
 
-    def test_verify_that_the_cross_function_forms_a_square_by_9_x_9_with_digits_and_rows(self):
-        quadrate = self.new_instance.cross(self.letters, self.numbers)
+    def test_verify_that_the_get_dictionary_keys_function_forms_a_square_by_9_x_9_with_digits_and_rows(self):
+        quadrate = self.new_instance.get_dictionary_keys(self.letters, self.numbers)
         quadrate_to_compare = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9']
         self.assertEqual (quadrate_to_compare, quadrate)
 
@@ -28,28 +28,23 @@ class TestPeterAlgorithm(unittest.TestCase):
     def test_verify_that_peers_using_squares (self):
         assert all (len(self.new_instance.peers[s]) == 20 for s in self.new_instance.squares)
 
-    def test_verify_that_the_function_parse_grid_in_dictionary_converts_a_grid_in_a_dictionary(self):
-        var_grid = self.new_instance.parse_grid_in_dictionary (self.game_grid)
+    def test_verify_that_the_function_get_parse_grid_in_dictionary_converts_a_grid_in_a_dictionary(self):
+        var_grid = self.new_instance.get_parse_grid_in_dictionary (self.game_grid)
         var_dicc = self.game_dictionary
         self.assertDictEqual (var_dicc, var_grid)
 
-    def test_verify_that_the_function_grid_values_convert_a_solution_in_a_dictionary(self):
-        var_grid = self.new_instance.grid_values (self.game_grid_solved)
+    def test_verify_that_the_function_get_grid_values_convert_a_solution_in_a_dictionary(self):
+        var_grid = self.new_instance.get_grid_values (self.game_grid_solved)
         var_dicc = self.game_dictionary_solved
         self.assertDictEqual (var_dicc, var_grid)
 
     def test_verify_that_the_function_solve_return_a_solution(self):
-        var_grid = self.new_instance.grid_values (self.game_grid_solved)
+        var_grid = self.new_instance.get_grid_values (self.game_grid_solved)
         var_dicc = self.game_dictionary_solved
         self.assertDictEqual (var_dicc, var_grid)
 
-    def test_verify_that_the_function_parse_grid_and_grouped_into_nine_digits_is_working(self):
-        var_grid_with_spaces = "050807020\n600010090\n702540006\n070020301\n504000908\n103080070\n900076205\n060090003\n080103040\n"
-        var_grid = self.new_instance.parse_grid_and_grouped_into_nine_digits(self.game_grid)
-        self.assertEqual (var_grid_with_spaces, var_grid)
-
-    def test_verify_that_the_function_game_solution_convert_the_dictionary_to_string_solution(self):
-        var_grid = self.new_instance.game_solution (self.game_grid_solved)
+    def test_verify_that_the_function_get_game_solution_convert_the_dictionary_to_string_solution(self):
+        var_grid = self.new_instance.get_game_solution (self.game_grid_solved)
         var_grid_solved = self.game_grid_solved
         self.assertEqual (var_grid_solved,var_grid)
 

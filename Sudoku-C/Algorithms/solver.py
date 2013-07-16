@@ -66,7 +66,7 @@ class Solver:
                 self.original = board.get_str()
                 puzzle = board.get_str()
                 petersk = peter_algorithm.peter_algorithm()
-                self.solution = petersk.game_solution(puzzle)
+                self.solution = petersk.get_game_solution (puzzle)
                 self.solve_time = petersk.get_time()
                 print(self.human_string(self.solution))
                 print self.solve_time
