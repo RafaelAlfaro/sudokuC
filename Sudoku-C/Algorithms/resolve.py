@@ -22,40 +22,40 @@ class Resolve:
         """ we are going to start on [0, 0]"""
         pos = Position(max_rows, max_col)
     
-        currentCell = []
+        current_cell = []
         possibleCell = []
             
         while not pos.end_matrix():
-            posibles = self.new_test_sudoku.try_sudoku(sudoku, currentCell, pos.get_row(), pos.get_col())
+            possibles = self.new_test_sudoku.try_sudoku(sudoku, current_cell, pos.get_row(), pos.get_col())
     
-            while posibles == []:
+            while possibles == []:
                 if pos.end_matrix():
                     """we arrived to end"""
-                    self.new_print_solve_game.print_solve(sudoku, currentCell)
+                    self.new_print_solve_game.print_solve(sudoku, current_cell)
                     return True
                 pos.next_position()
-                posibles = self.new_test_sudoku.try_sudoku(sudoku, currentCell, pos.get_row(), pos.get_col())
+                possibles = self.new_test_sudoku.try_sudoku(sudoku, current_cell, pos.get_row(), pos.get_col())
     
-            if posibles == [-1]:
+            if possibles == [-1]:
                 """ Backtracking """
-                estado = currentCell.pop()
+                estado = current_cell.pop()
                 while estado[0] != possibleCell[-1][0] or estado[1] != possibleCell[-1][1]:
-                    estado = currentCell.pop()
+                    estado = current_cell.pop()
                 """now the last states for both have the same position"""
-                currentCell.append(possibleCell.pop())
+                current_cell.append(possibleCell.pop())
                 
                 """ we put the correct position """
-                pos.set_row(currentCell[-1][0])
-                pos.set_col(currentCell[-1][1])
+                pos.set_row(current_cell[-1][0])
+                pos.set_col(current_cell[-1][1])
             else:
                 """
                 here we have some possibles assertions
-                we catch the first one and we have to input to the currentCell, and the rest in to possibleCell 
+                we catch the first one and we have to input to the current_cell, and the rest in to possibleCell 
                 """
-                for posible in posibles[1:]:
-                    possibleCell.append([pos.get_row(), pos.get_col(), posible])
+                for possible in possibles[1:]:
+                    possibleCell.append([pos.get_row(), pos.get_col(), possible])
     
-                currentCell.append([pos.get_row(), pos.get_col(), posibles[0]])
+                current_cell.append([pos.get_row(), pos.get_col(), possibles[0]])
     
             pos.next_position()
    

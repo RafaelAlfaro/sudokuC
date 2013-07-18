@@ -1,5 +1,5 @@
 import time
-class Peter_algorithm:
+class PeterAlgorithm:
     def get_dictionary_keys(self, row_values, column_values):
         """ Function that elaborates a square by 9 x 9 using the
         row_values and column_values. Together they form the keys
