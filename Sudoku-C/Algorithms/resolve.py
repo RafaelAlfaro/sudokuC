@@ -26,15 +26,15 @@ class Resolve:
         possibleCell = []
             
         while not pos.end_matrix():
-            posibles = self.new_test_sudoku.try_sudoku(sudoku, currentCell, pos.getRow(), pos.getCol())
+            posibles = self.new_test_sudoku.try_sudoku(sudoku, currentCell, pos.get_row(), pos.get_col())
     
             while posibles == []:
                 if pos.end_matrix():
                     """we arrived to end"""
                     self.new_print_solve_game.print_solve(sudoku, currentCell)
                     return True
-                pos.sig()
-                posibles = self.new_test_sudoku.try_sudoku(sudoku, currentCell, pos.getRow(), pos.getCol())
+                pos.next_position()
+                posibles = self.new_test_sudoku.try_sudoku(sudoku, currentCell, pos.get_row(), pos.get_col())
     
             if posibles == [-1]:
                 """ Backtracking """
@@ -45,19 +45,19 @@ class Resolve:
                 currentCell.append(possibleCell.pop())
                 
                 """ we put the correct position """
-                pos.setRow(currentCell[-1][0])
-                pos.setCol(currentCell[-1][1])
+                pos.set_row(currentCell[-1][0])
+                pos.set_col(currentCell[-1][1])
             else:
                 """
                 here we have some possibles assertions
                 we catch the first one and we have to input to the currentCell, and the rest in to possibleCell 
                 """
                 for posible in posibles[1:]:
-                    possibleCell.append([pos.getRow(), pos.getCol(), posible])
+                    possibleCell.append([pos.get_row(), pos.get_col(), posible])
     
-                currentCell.append([pos.getRow(), pos.getCol(), posibles[0]])
+                currentCell.append([pos.get_row(), pos.get_col(), posibles[0]])
     
-            pos.sig()
+            pos.next_position()
    
     def generate_matrix(self, row, col):
         """

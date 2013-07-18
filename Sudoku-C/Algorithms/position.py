@@ -8,7 +8,7 @@ class Position:
         self.row = 0
         self.col = 0
 
-    def setRow(self, row):
+    def set_row(self, row):
         """
         it set a row
         row is a variable in order to set the new row
@@ -20,7 +20,7 @@ class Position:
         else:
             self.row = row
 
-    def setCol(self, col):
+    def set_col(self, col):
         """
         it set a column
         col is a variable in order to set the new column
@@ -32,13 +32,13 @@ class Position:
         else:
             self.col = col
 
-    def getRow(self):
+    def get_row(self):
         """
         it returns the current row
         """
         return self.row
 
-    def getCol(self):
+    def get_col(self):
         """
         it returns the current column
         """
@@ -58,7 +58,7 @@ class Position:
         self.row = 0
         self.col = 0
 
-    def sig(self):
+    def next_position(self):
         """
         it increase the position in order to go next position
         but it should not be more than end max_row and end max_col
@@ -72,7 +72,7 @@ class Position:
                     self.row = -1
                     self.col = -1
 
-    def getPos(self):
+    def get_position(self):
         """
         it returns the current position
         """

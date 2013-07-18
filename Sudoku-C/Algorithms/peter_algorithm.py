@@ -1,5 +1,5 @@
 import time
-class peter_algorithm:
+class Peter_algorithm:
     def get_dictionary_keys(self, row_values, column_values):
         """ Function that elaborates a square by 9 x 9 using the
         row_values and column_values. Together they form the keys
@@ -59,37 +59,30 @@ class peter_algorithm:
         False if a contradiction is detected.
 
         Keyword arguments:
-            values -- receive the dictionary with game unresolved.
-            square_value -- receive the key of the dictionary
+            values -- receive the dictionary with game unresolved. E.g. {'A1': '0', 'A2': '3'}
+            square_value -- receive the key of the dictionary E.g. [A1, A2, A3....B1, B2]
             digit -- receive the digit which will be replaced in a key of
-            the dictionary.
+            the dictionary. E.g. 4
         """
         other_values = values[square_value].replace(digit, '')
         if all(self.get_eliminate_values(values, square_value, auxiliary_digit) \
                for auxiliary_digit in other_values):
             return(values)
         else:
-		return(False)
+            return(False)
 
-    def get_eliminate_values(self, values, square_value, digit):
-        """	Eliminate digit from values[square_value]; propagate when values
-        or places <= 2. Return values, except return False if a contradiction
-        is detected.
+    def get_digit_by_reviewing_squares (self, values, square_value, digit):
+        """ Function that receives the dictionary with all digits, then moves through the
+            dictionary checking if the value that has in digit can be set as a solution for
+            the square.
+            When set the value of digit, returns a True values to the get eliminate values function
 
-        Keyword arguments:
-            values -- receive the dictionary with game unresolved.
-            square_value -- receive the key of the dictionary
-            digit -- receive the digit which will be deleted in a key of
-            the dictionary.
-        """
-        if digit not in values[square_value]:
-            return(values)
-        values[square_value] = values[square_value].replace(digit, '')
-        if len(values[square_value]) == 1:
-            auxiliary_digit = values[square_value]
-            if not all(self.get_eliminate_values(values, square_auxiliary, auxiliary_digit) \
-              for square_auxiliary in self.peers[square_value]):
-                return(False)
+            Keyword arguments:
+            values -- receive the dictionary with game unresolved E.g. {'A1': '0', 'A2': '3'}
+            square_value -- receive the key of the dictionary E.g. [A1, A2, A3....B1, B2]
+            digit -- receive the digit which will be deleted in a key of the dictionary.
+            E.g. 4
+            """
         for unit in self.units[square_value]:
             row_complete_in_dictionary = [square_value for square_value in unit if digit\
                                          in values[square_value]]
@@ -98,6 +91,32 @@ class peter_algorithm:
             elif len(row_complete_in_dictionary) == 1:
                 if not self.get_values_solution(values, row_complete_in_dictionary[0], digit):
                     return(False)
+        return True
+
+    def get_eliminate_values(self, values, square_value, digit):
+        """	Eliminate digit from values[square_value]; propagate when values
+        or places <= 2. Return values, except return False if a contradiction
+        is detected.
+
+        Keyword arguments:
+            values -- receive the dictionary with game unresolved E.g. {'A1': '0', 'A2': '3'}
+            square_value -- receive the key of the dictionary E.g. [A1, A2, A3....B1, B2]
+            digit -- receive the digit which will be deleted in a key of the dictionary. E.g. 4
+            auxiliary_digit --  When the values has the last two digits, the auxiliary digit takes
+                                the first value and call the get eliminate values function to see
+                                what value is the solution and  prevent the square is saved with
+                                empty value.
+        """
+        if digit not in values[square_value]:
+            return(values)
+        values[square_value] = values[square_value].replace(digit, '')
+        if len(values[square_value]) == 1:
+            auxiliary_digit = values[square_value]
+            if not all(self.get_eliminate_values(values, square_value, auxiliary_digit) \
+              for square_value in self.peers[square_value]):
+                return(False)
+            if not self.get_digit_by_reviewing_squares(values, square_value, digit):
+                return False
         return values
 
     def get_solve (self, grid):
@@ -118,6 +137,7 @@ class peter_algorithm:
 
         Keyword arguments:
             values -- receive the dictionary with game unresolved.
+            E.g. {'A1': '0', 'A2': '3'}
         """
         if values is False:
             return(False)

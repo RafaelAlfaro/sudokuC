@@ -22,79 +22,79 @@ class UnitTestBacktrak(unittest.TestCase):
         self.new_resolve = Resolve(self.sudoku_str)
     
     def test_verify_it_can_set_row(self):
-        self.new_position.setRow(4)
-        self.assertEqual(4,self.new_position.getRow())
+        self.new_position.set_row(4)
+        self.assertEqual(4,self.new_position.get_row())
         
     
     def test_verify_it_can_set_row_equal_to_0_if_it_is_minor_to_0(self):
-        self.new_position.setRow(-1)
-        self.assertEqual(0,self.new_position.getRow())
+        self.new_position.set_row(-1)
+        self.assertEqual(0,self.new_position.get_row())
     
     def test_verify_it_cat_set_row_equal_to_minus_1_if_it_is_mayor_to_max_row(self):
-        self.new_position.setRow(11)
-        self.assertEqual(-1,self.new_position.getRow())
+        self.new_position.set_row(11)
+        self.assertEqual(-1,self.new_position.get_row())
     
     def test_verify_it_can_set_col(self):
-        self.new_position.setCol(5)
-        self.assertEqual(5,self.new_position.getCol())
+        self.new_position.set_col(5)
+        self.assertEqual(5,self.new_position.get_col())
     
     def test_verify_it_can_set_col_equal_to_0_if_it_is_minor_to_0(self):
-        self.new_position.setCol(-2)
-        self.assertEqual(0,self.new_position.getCol())
+        self.new_position.set_col(-2)
+        self.assertEqual(0,self.new_position.get_col())
     
     def test_verify_it_cat_set_col_equal_to_minus_1_if_it_is_mayor_to_max_col(self):
-        self.new_position.setCol(20)
-        self.assertEqual(-1,self.new_position.getCol())
+        self.new_position.set_col(20)
+        self.assertEqual(-1,self.new_position.get_col())
     
     def test_verify_it_can_get_row(self):
-        self.new_position.setRow(8)
-        self.assertEqual(8,self.new_position.getRow())
+        self.new_position.set_row(8)
+        self.assertEqual(8,self.new_position.get_row())
     
     def test_verify_it_can_get_col(self):
-        self.new_position.setCol(4)
-        self.assertEqual(4,self.new_position.getCol())
+        self.new_position.set_col(4)
+        self.assertEqual(4,self.new_position.get_col())
     
     def test_verify_it_is_end_of_the_matrix_it_should_return_minus_1(self):
-        self.new_position.setRow(self.max_col)
-        self.new_position.setCol(self.max_row)
+        self.new_position.set_row(self.max_col)
+        self.new_position.set_col(self.max_row)
         self.assertTrue(self.new_position.end_matrix())
     
     def test_verify_it_can_reset_to_zero_the_row_and_col(self):
         self.new_position.reset()
-        self.assertEqual(0,self.new_position.getCol())
-        self.assertEqual(0,self.new_position.getRow())
+        self.assertEqual(0,self.new_position.get_col())
+        self.assertEqual(0,self.new_position.get_row())
     
     def test_verify_it_can_move_to_next_vale_of_a_matrix(self):
         """
         if initial position is row = 0, col = 1
         the next position should be row = 0, col = 2
         """
-        self.new_position.setRow(0)
-        self.new_position.setCol(1)
-        self.new_position.sig()
-        self.assertEqual(0,self.new_position.getRow())
-        self.assertEqual(2,self.new_position.getCol())
+        self.new_position.set_row(0)
+        self.new_position.set_col(1)
+        self.new_position.next_position()
+        self.assertEqual(0,self.new_position.get_row())
+        self.assertEqual(2,self.new_position.get_col())
     
     def test_verify_it_can_not_move__next_row_if_it_is_mayor_to_max_row(self):
-        self.new_position.setRow(self.max_row + 1)
-        self.new_position.sig()
-        self.assertEqual(-1,self.new_position.getRow())
+        self.new_position.set_row(self.max_row + 1)
+        self.new_position.next_position()
+        self.assertEqual(-1,self.new_position.get_row())
         
     def test_verify_it_can_move_to_next_col_if_it_is_mayor_to_max_col(self):
-        self.new_position.setCol(self.max_col + 1)
-        self.new_position.sig()
-        self.assertEqual(0,self.new_position.getCol())
+        self.new_position.set_col(self.max_col + 1)
+        self.new_position.next_position()
+        self.assertEqual(0,self.new_position.get_col())
     
     def test_verify_it_can_not_move_to_next_value_if_it_is_end_of_the_matrix(self):
-        self.new_position.setRow(self.max_row)
-        self.new_position.setCol(self.max_col)
-        self.new_position.sig()
+        self.new_position.set_row(self.max_row)
+        self.new_position.set_col(self.max_col)
+        self.new_position.next_position()
         self.assertTrue(self.new_position.end_matrix())
     
     def test_verify_it_can_get_a_position_of_a_matrix(self):
-        self.new_position.setRow(3)
-        self.new_position.setCol(3)
-        self.assertEqual([3,3],self.new_position.getPos())
+        self.new_position.set_row(3)
+        self.new_position.set_col(3)
+        self.assertEqual([3,3],self.new_position.get_position())
     
     def test_verify_it_could_resolve_a_sudoku(self):
         self.new_resolve.resolve(self.sudoku_matrix)

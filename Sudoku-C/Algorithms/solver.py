@@ -65,7 +65,7 @@ class Solver:
             if(board.verify_string_to_sudoku()):
                 self.original = board.get_str()
                 puzzle = board.get_str()
-                petersk = peter_algorithm.peter_algorithm()
+                petersk = peter_algorithm.Peter_algorithm()
                 self.solution = petersk.get_game_solution (puzzle)
                 self.solve_time = petersk.get_time()
                 print(self.human_string(self.solution))
@@ -101,7 +101,6 @@ print "RECURSIVE ALGORITHM"
 print "----------------------"
 
 board_easy = "040000700000700001005021006000800900600002003030005008301640000000050000006008200"
-
 
 algorithm = "recursive"
 sl = Solver(board_easy)
