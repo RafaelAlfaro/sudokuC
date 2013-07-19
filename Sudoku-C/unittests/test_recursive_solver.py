@@ -2,6 +2,8 @@
 Created on Jul 07, 2013
 @author: Rafael Alfaro
 '''
+import sys
+sys.path.append("../lib")
 import unittest
 import recursive
 
@@ -73,5 +75,5 @@ class Testrecursive(unittest.TestCase):
         solution = sudoku.solve(self.matrix,'0')
         self.assertEqual(solution,self.matrix_sl)
 
-if __name__ == '__main__':
-    unittest.main()
+##if __name__ == '__main__':
+##    unittest.main()

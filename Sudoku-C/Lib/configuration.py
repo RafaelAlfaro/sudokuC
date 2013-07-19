@@ -1,11 +1,11 @@
 #-------------------------------------------------------------------------------
-# Name:        configuration
+# Name:    Configuration
 # Purpose: The purpose of this test case is handle a XML. This xml will be said config.xml
 #          The config.xml contains the configration of Sudoku game:
 #          algorithm : This atribute will contain the algorithm to be use by default.
-#				Peter_n
+#				Peter Novig
 #				Backtraking
-#				Other : TBD
+#               Recursive
 #	difficulty : This atribute will contain the levels of difficulty
 #				 Easy : TBD
 #				 Medium : TBD
@@ -40,38 +40,39 @@ class Configuration:
         self.output_path - the path of output
         self.name = attribute of configuration tag
         """
+
         self.name_of_file = file_name
-        self.path_of_file = os.getcwd() + "\\configurations\\"
+        self.path_of_file = "..\\configurations\\"
         self.algorithm = "Backtraking"
         self.difficulty = "Easy"
         self.id = "1"
         self.min = "46"
         self.max = "49"
         self.solver_output_type = "txt"
-        self.output_path = os.getcwd() + "\\outputs\\"
+        self.output_path = "..\\outputs\\"
         self.name = "configuration"
 
-    def print_configuration (self):
-        """
-        This method prints the variables of object
-        algorithm - Algorithm used
-        difficulty - Difficulty used
-        id - id of level
-        min - minimums hold in the board
-        max - Maximus hold in the board
-        solver_output_type - type of output (txt or cvs)
-        output_path - the path of output
-
-        """
-        print("Name : ", self.name_of_file)
-        print("Path of scrypt :", self.path_of_file)
-        print("Algorithm:", self.algorithm)
-        print("Difficulty:", self.difficulty)
-        print("ID difficulty:", self.id)
-        print("Value minimus :", self.min)
-        print("Value maximus :", self.max)
-        print("Solver_output_type", self.solver_output_type)
-        print("Ouput folder", self.output_path)
+##    def print_configuration (self):
+##        """
+##        This method prints the variables of object
+##        algorithm - Algorithm used
+##        difficulty - Difficulty used
+##        id - id of level
+##        min - minimums hold in the board
+##        max - Maximus hold in the board
+##        solver_output_type - type of output (txt or cvs)
+##        output_path - the path of output
+##
+##        """
+##        print("Name : ", self.name_of_file)
+##        print("Path of scrypt :", self.path_of_file)
+##        print("Algorithm:", self.algorithm)
+##        print("Difficulty:", self.difficulty)
+##        print("ID difficulty:", self.id)
+##        print("Value minimus :", self.min)
+##        print("Value maximus :", self.max)
+##        print("Solver_output_type", self.solver_output_type)
+##        print("Ouput folder", self.output_path)
 
 
     def verify_if_config_file_exist(self):
@@ -85,7 +86,6 @@ class Configuration:
             fichero = open(file_path)
             fichero.close()
         except:
-            print ("config.xml must be in the path :", self.path_of_file)
             return False
         return True
 
@@ -130,7 +130,7 @@ class Configuration:
             xmlfile.write("</configuration>\n")
             xmlfile.close()
         except:
-            print ("default config.xml cannot be created in the path:", self.path_of_file)
+            return ("default config.xml cannot be created in the path:", self.path_of_file)
 
 
     def create_folders_are_not_exist(self):
@@ -142,69 +142,30 @@ class Configuration:
         """
         path_conf = self.path_of_file
         path_output = self.output_path
-        if (not(os.path.exists (path_conf))):
-            os.mkdir(path_conf)
-        if (not(os.path.exists (path_output))):
-            os.mkdir(path_output)
+        try:
+            if (not(os.path.exists (path_conf))):
+                os.mkdir(path_conf)
+            if (not(os.path.exists (path_output))):
+                os.mkdir(path_output)
+            return True
+        except:
+            return False
 
-    def modify_algorithm(self, type_algorithm):
+    def modify_value_in_xml(self, value,item):
         """
-        This method modify the node "algorithm" in the xml of configuration
-        In the variable "type_algorithm" has the type of algorithm
+        This method modify the nodes "algorithm", 'difficulty', 'solver_output_type'
+        , 'path_output' in the xml of configuration
+        In the variable value has the type of 'algorithm', 'difficulty',
+        'solver_output_type', 'path_output'
         The xml file will be modified
         """
         if(self.verify_if_config_file_exist()):
             file_path = self.get_configuration_path()
             tree = xmltree.parse(file_path)
             root = tree.getroot()
-            self.algorithm = type_algorithm
-            for algorithm in root.iter('algorithm'):
-                algorithm.text = str(type_algorithm)
-            tree.write(file_path, encoding ='utf-8', xml_declaration = True)
-
-    def modify_difficulty(self, level_difficulty):
-        """
-        This method modify the node "difficulty" in the xml of configuration
-        In the variable "level_difficulty" has the level of difficulty
-        The xml file will be modified
-        """
-        if(self.verify_if_config_file_exist()):
-            file_path = self.get_configuration_path()
-            tree = xmltree.parse(file_path)
-            root = tree.getroot()
-            self.difficulty = level_difficulty
-            for difficulty in root.iter('difficulty'):
-                difficulty.text = str(level_difficulty)
-            tree.write(file_path,encoding='utf-8', xml_declaration=True)
-
-    def modify_solver_output_type(self, type_ouput):
-        """
-        This method modify the node "level_type_ouput" in the xml of configuration
-        In the variable "type_ouput" has the type of output
-        The xml file will be modified
-        """
-        if(self.verify_if_config_file_exist()):
-            file_path = self.get_configuration_path()
-            tree = xmltree.parse(file_path)
-            root = tree.getroot()
-            self.solver_output_type = type_ouput
-            for solver_output_type in root.iter('solver_output_type'):
-                solver_output_type.text = str(type_ouput)
-            tree.write(file_path, encoding = 'utf-8', xml_declaration = True)
-
-    def modify_path_output(self, output):
-        """
-        This method modify the node "path_output" in the xml of configuration
-        In the variable "output" has the path of outputs
-        The xml file will be modified
-        """
-        if(self.verify_if_config_file_exist()):
-            file_path = self.get_configuration_path()
-            tree = xmltree.parse(file_path )
-            root = tree.getroot()
-            self.output_path = output
-            for path_output in root.iter('path_output'):
-                path_output.text = str(output)
+            self.algorithm = value
+            for algorithm in root.iter(item):
+                algorithm.text = str(value)
             tree.write(file_path, encoding ='utf-8', xml_declaration = True)
 
     def modify_levels(self, level, min_zeros, max_zeros):
@@ -228,8 +189,10 @@ class Configuration:
                         leve_attrib['min'] = str(min_zeros)
                         leve_attrib['max'] = str(max_zeros)
                         tree.write(file_path, encoding='utf-8', xml_declaration = True)
+
+                return True
             else:
-                print ("Value min must be less that max")
+                return ("Value min must be less that max")
 
     def add_levels(self, level, min_zeros, max_zeros):
         """"
@@ -249,7 +212,21 @@ class Configuration:
                     child = xmltree.SubElement(level_root,'level',attributes)
                 tree.write(file_path,encoding ='utf-8', xml_declaration = True)
             else:
-                print ("Value min must be less that max")
+                return ("Value min must be less that max")
+
+    def modify_path_conf_file(self, folder_path ,file_name = "config.xml"):
+        """
+        This method modify the path of config.xml file into the object
+        """
+        self.name_of_file = file_name
+        self.path_of_file = folder_path
+
+    def modify_path_output(self, output_folder):
+        """
+        This method will modify the output path in the object
+        """
+        self.output_path = output_folder
+
 
     def get_number_of_levels(self):
         """
@@ -287,75 +264,19 @@ class Configuration:
             self.tree = xmltree.parse(self.get_configuration_path())
             return self.tree.getroot()
 
-    def get_name(self, root):
+    def get_value_from_xml(self, root, tag):
         """
         It receives root (it contains the xml file data)> returns the attribute name
         of the Configuration tag as string.
         root > it has the configuration xml file as a tree object
         """
-        for config in root.findall('default'):
-            name = config.get('name')
-            if name != "":
-                self.name = name
-                return name
-            else:
-                return self.name
-
-    def get_algorithm(self, root):
-        """
-        It receives root (it contains the xml file data)> returns the ALGORITHM
-        tag value as string.
-        if this value is empty, it returns the ALGORITHM default value as string.
-        root > it has the configuration xml file as a tree object
-        """
-        for config in root.findall('default'):
-            algorithm = config.find('algorithm').text
-            if algorithm != " ":
-                return algorithm
-            else:
-                return self.algorithm
-
-    def get_difficulty(self, root):
-        """
-        It receives root (it contains the xml file data)> returns the Difficulty
-        tag value as string.
-        if this value is empty, it returns the Difficulty default value as string.
-        root > it has the configuration xml file as a tree object
-        """
-        for config in root.findall('default'):
-            difficulty = config.find('difficulty').text
-            if difficulty != " ":
-                return difficulty
-            else:
-                return self.difficulty
-
-    def get_solver_output_type(self, root):
-        """
-        It receives root (it contains the xml file data)> returns the "solver_output_type"
-        tag value as string.
-        if this value is empty, it returns the "solver_output_type" default value as string.
-        root > it has the configuration xml file as a tree object
-        """
-        for config in root.findall('default'):
-            solver_output_type = config.find('solver_output_type').text
-            if solver_output_type != " ":
-                return solver_output_type
-            else:
-                return self.solver_output_type
-
-    def get_path_output(self, root):
-        """
-        It receives root (it contains the xml file data)> returns the "path_output" tag value
-        as string.
-        if this value is empty, it returns the "path_output" default value as string.
-        root > it has the configuration xml file as a tree object
-        """
-        for config in root.findall('default'):
-            path_output = config.find('path_output').text
-            if path_output != " ":
-                return path_output
-            else:
-                return self.output_path
+        value = ""
+        file_path = self.get_configuration_path()
+        tree = xmltree.parse(file_path)
+        root = tree.getroot()
+        for node in root.findall('default'):
+            value = node.find(tag).text
+        return value
 
     def verify_modif_tag(self, tag, value):
         """
@@ -364,31 +285,17 @@ class Configuration:
               difficulty, solver_output_type and path_output
         value > this variable will change at value tag of the xml coniguration file
         """
-        if tag == "algorithm":
-            self.modify_algorithm(value)
-            root = self.read_xml(self.get_configuration_path())
-            if self.get_algorithm(root) == value:
-                return True
-            else:
-                return False
-        elif tag == "difficulty":
-            self.modify_difficulty(value)
-            root = self.read_xml(self.get_configuration_path())
-            if self.get_difficulty(root) == value:
-                return True
-            else:
-                return False
-        elif tag == "solver_output_type":
-            self.modify_solver_output_type(value)
-            root = self.read_xml(self.get_configuration_path())
-            if self.get_solver_output_type(root) == value:
-                return True
-            else:
-                return False
-        elif tag == "path_output":
-            self.modify_path_output(value)
-            root = self.read_xml(self.get_configuration_path())
-            if self.get_path_output(root) == value:
-                return True
-            else:
-                return False
+
+        self.modify_value_in_xml(value,tag)
+        root = self.read_xml(self.get_configuration_path())
+        if (self.get_value_from_xml(root,'algorithm') == value):
+           return True
+        elif (self.get_value_from_xml(root,'difficulty') == value):
+            return True
+        elif (self.get_value_from_xml(root,'solver_output_type')  == value):
+            return True
+        elif (self.get_value_from_xml(root,'path_output') == value):
+            return True
+        else:
+            return False
+
