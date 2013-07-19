@@ -17,10 +17,13 @@ class FileTxt:
     def read_txt_file(self):
         """ Open  a file that contains the game in the form of nine characters and a \n.
         """
-        f = open(self.file_path, "r")
-        self.file_content = f.read()
-        f.close()
-        return self.file_content
+        try:
+            f = open(self.file_path, "r")
+            self.file_content = f.read()
+            f.close()
+            return self.file_content
+        except:
+            return []
 
     def parse_txt_file_on_a_single_line(self):
         """ Function that converts the contents of the text file in a single line without \n.
@@ -54,11 +57,13 @@ class FileTxt:
         self.file_name = name_of_file
         self.generate_name_txt_file(name_of_file)
         path_txt = self.file_path+self.file_name
-        f = open(path_txt, "w")
-        f.write(content)
-        f.close()
-        return True
-
+        try:
+            f = open(path_txt, "w")
+            f.write(content)
+            f.close()
+            return True
+        except:
+            return False
 
 
     def get_quantity_of_zeros(self, content):

@@ -52,27 +52,27 @@ class Configuration:
         self.output_path = "..\\outputs\\"
         self.name = "configuration"
 
-##    def print_configuration (self):
-##        """
-##        This method prints the variables of object
-##        algorithm - Algorithm used
-##        difficulty - Difficulty used
-##        id - id of level
-##        min - minimums hold in the board
-##        max - Maximus hold in the board
-##        solver_output_type - type of output (txt or cvs)
-##        output_path - the path of output
-##
-##        """
-##        print("Name : ", self.name_of_file)
-##        print("Path of scrypt :", self.path_of_file)
-##        print("Algorithm:", self.algorithm)
-##        print("Difficulty:", self.difficulty)
-##        print("ID difficulty:", self.id)
-##        print("Value minimus :", self.min)
-##        print("Value maximus :", self.max)
-##        print("Solver_output_type", self.solver_output_type)
-##        print("Ouput folder", self.output_path)
+    def print_configuration (self):
+        """
+        This method prints the variables of object
+        algorithm - Algorithm used
+        difficulty - Difficulty used
+        id - id of level
+        min - minimums hold in the board
+        max - Maximus hold in the board
+        solver_output_type - type of output (txt or cvs)
+        output_path - the path of output
+
+        """
+        print("Name : ", self.name_of_file)
+        print("Path of scrypt :", self.path_of_file)
+        print("Algorithm:", self.algorithm)
+        print("Difficulty:", self.difficulty)
+        print("ID difficulty:", self.id)
+        print("Value minimus :", self.min)
+        print("Value maximus :", self.max)
+        print("Solver_output_type", self.solver_output_type)
+        print("Ouput folder", self.output_path)
 
 
     def verify_if_config_file_exist(self):
@@ -288,14 +288,8 @@ class Configuration:
 
         self.modify_value_in_xml(value,tag)
         root = self.read_xml(self.get_configuration_path())
-        if (self.get_value_from_xml(root,'algorithm') == value):
+        if (self.get_value_from_xml(root,tag) == value):
            return True
-        elif (self.get_value_from_xml(root,'difficulty') == value):
-            return True
-        elif (self.get_value_from_xml(root,'solver_output_type')  == value):
-            return True
-        elif (self.get_value_from_xml(root,'path_output') == value):
-            return True
         else:
             return False
 
