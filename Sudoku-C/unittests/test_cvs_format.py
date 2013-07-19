@@ -15,6 +15,7 @@ class Test_cvs_format(unittest.TestCase):
         #sudoku in str
         self.sk_str = "040000700000700001005021006000800900600002003030005008301640000000050000006008200"
         self.sk_cvs_in_file = "340600000,007000000,020080570,000005000,070010020,000400000,036020010,000000900,000007082"
+        self.sk_str_dots = ".4....7.....7....1..5.21..6...8..9..6....2..3.3...5..83.164........5......6..82.."
         self.path = os.getcwd()
         self.cvs_path = self.path + "\\sources\\cvs_file_1.cvs"
         self.cvs_path_save = self.path + "\\sources\\cvs_file_2.cvs"
@@ -80,6 +81,28 @@ class Test_cvs_format(unittest.TestCase):
         cvs_validation = cvs_format.Cvs_format(self.cvs_sk)
         self.assertEqual(self.sk_str,cvs_validation.get_sudoku_cvs_to_str())
 
+    def test_change_to_cvs_format(self):
+        cvs_validation = cvs_format.Cvs_format()
+        sk_str_changed = cvs_validation.change_to_cvs_format(self.sk_str_dots)
+        self.assertEqual(self.sk_str, sk_str_changed)
+
+    def test_get_sudoku_cvs_to_str_false(self):
+        self.sk_str_dots = self.sk_str_dots + "A"
+        cvs_validation = cvs_format.Cvs_format(self.sk_str_dots)
+        value = cvs_validation.get_sudoku_cvs_to_str()
+        self.assertEqual([], value)
+
+    def test_read_a_cvs_form_file_false(self):
+        path_false = "j:\\path_false\\false.cvs"
+        cvs_validation = cvs_format.Cvs_format()
+        value = cvs_validation.read_a_cvs_form_file(path_false)
+        self.assertEqual("The file cannot be read", value)
+
+    def test_write_to_cvs_file_false(self):
+        path_false = "j:\\path_false\\false.cvs"
+        cvs_validation = cvs_format.Cvs_format()
+        value = cvs_validation.write_to_cvs_file(path_false,self.sk_str)
+        self.assertEqual("The file cannot be read", value)
 
 ##if __name__ == '__main__':
 ##    sys.exit(unittest.main())

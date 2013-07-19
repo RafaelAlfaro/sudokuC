@@ -35,11 +35,9 @@ class Htmlsudoku:
           """
           self.header_start = "<html>\n<head>\n<title>@title</title>\n</head>\n"
           self.body_start = "<body>\n"
-          self.table_begin = "<table summary=\"@caption\" border=@value align=\"center\">\n<\
-                              caption>@caption</caption>\n"
+          self.table_begin = "<table summary=\"@caption\" border=@value align=\"center\">\n<caption>@caption</caption>\n"
           self.thead_start = "<thead>\n<tr>\n"
-          self.th_column = "<th scope=\"col\" bgcolor=#@color width= 10 align= \
-                            \"center\">@value</th>\n"
+          self.th_column = "<th scope=\"col\" bgcolor=#@color width= 10 align= \"center\">@value</th>\n"
           self.thead_end = "</tr>\n</thead>\n"
           self.tbody_start = "<tbody>\n"
           self.tr_start = "<tr>\n"
