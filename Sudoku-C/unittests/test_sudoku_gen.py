@@ -64,5 +64,5 @@ class Test_sudoku_gen(unittest.TestCase):
         board = puzzle.get_sudoku(5,5)
         self.assertEqual("None",board)
 
-#if __name__ == '__main__':
-#    unittest.main()
+if __name__ == '__main__':
+    unittest.main()

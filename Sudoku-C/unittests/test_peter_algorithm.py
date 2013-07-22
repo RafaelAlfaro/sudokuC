@@ -48,5 +48,5 @@ class TestPeterAlgorithm(unittest.TestCase):
         var_grid_solved = self.game_grid_solved
         self.assertEqual (var_grid_solved,var_grid)
 
-##if __name__ == '__main__':
-##	unittest.main()
+#if __name__ == '__main__':
+#	unittest.main()

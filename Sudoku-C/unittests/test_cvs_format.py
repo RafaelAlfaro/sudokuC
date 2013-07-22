@@ -104,5 +104,5 @@ class Test_cvs_format(unittest.TestCase):
         value = cvs_validation.write_to_cvs_file(path_false,self.sk_str)
         self.assertEqual("The file cannot be read", value)
 
-##if __name__ == '__main__':
-##    sys.exit(unittest.main())
+if __name__ == '__main__':
+    sys.exit(unittest.main())

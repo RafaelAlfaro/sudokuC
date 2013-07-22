@@ -33,7 +33,7 @@ class TestConfiguration(unittest.TestCase):
         name = "config_false.xml"
         xml_conf = configuration.Configuration(name)
         self.assertFalse(xml_conf.verify_if_config_file_exist())
-##
+        
     def test_verify_if_config_file_exist_True_default(self):
         xml_conf = configuration.Configuration()
         file_path = xml_conf.get_configuration_path()
@@ -43,11 +43,11 @@ class TestConfiguration(unittest.TestCase):
     def test_verify_xml_format(self):
         xml_conf = configuration.Configuration()
         self.assertFalse(xml_conf.verify_xml_format())
-##
+
     def test_create_default_configuration_xml_if_conf_file_does_not_exist(self):
         name = "config69.xml"
         xml_conf = configuration.Configuration(name)
-##        file_path = os.getcwd() + "..\\configurations\\"+name
+
         file_path = "sources\\"+name
         xml_conf.create_default_configuration_xml(file_path)
         self.assertTrue(os.path.exists (file_path))
@@ -57,7 +57,7 @@ class TestConfiguration(unittest.TestCase):
         xml_conf = configuration.Configuration(name)
         file_modify = xml_conf.verify_modif_tag("algorithm", "backtraking")
         self.assertTrue(file_modify)
-##
+
     def test_verify_if_modify_difficulty_node_in_xml(self):
         name = "config.xml"
         xml_conf = configuration.Configuration(name)
@@ -155,5 +155,5 @@ class TestConfiguration(unittest.TestCase):
         self.assertTrue(xmlfile.create_folders_are_not_exist())
 
 
-#if __name__ == '__main__':
-#    unittest.main()
+if __name__ == '__main__':
+    unittest.main()

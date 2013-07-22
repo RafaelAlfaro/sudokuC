@@ -87,5 +87,5 @@ class TestFileTxt(unittest.TestCase):
         file = self.new_instance.create_txt_file(self.content_no_parsed, "salida")
         self.assertTrue (file)
 
-#if __name__ == '__main__':
-#	unittest.main()
+if __name__ == '__main__':
+	unittest.main()
