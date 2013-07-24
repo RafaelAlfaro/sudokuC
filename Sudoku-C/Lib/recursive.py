@@ -127,7 +127,6 @@ class Recursive:
         get the time used to solve the puzzle in "time"
         and the solution of puzzle is put in "solution"
         """
-        #self.board = self.verify_line(self.board,self.chr_empty)
         grid = self.load_puzzle(self.board)
         start = time.clock()
         soln = self.solve(grid,self.chr_empty)

@@ -1,3 +1,8 @@
+'''
+Created on Jul 07, 2013
+@author: Rafael Alfaro
+'''
+import time
 class Cvs_format:
     def __init__(self, cvs_string=""):
         """
@@ -30,8 +35,19 @@ class Cvs_format:
         except:
             return ("The file cannot be read")
 
+    def generate_name_cvs_file(self,file_name = ""):
+        """ This function generate a name for the text file  using the date and time of the
+            local computer.
+        """
+        get_time = time.strftime('%H%M%S%m%d%Y')
+        if(file_name == ""):
+            file_name = "sudoku_"+get_time+".cvs"
+        else:
+            file_name = name_of_file + "_"
+            file_name += get_time+".cvs"
+        return file_name
 
-    def write_to_cvs_file (self, file_path,puzzle):
+    def write_to_cvs_file (self, file_path,puzzle,result=""):
         """
         This method write to file the cvs
         Keyword arguments:
@@ -39,12 +55,14 @@ class Cvs_format:
             puzzle: the string to save in the file
         """
         try:
+            file_path = file_path + "\\" +self.generate_name_cvs_file()
             cvs_file = open(file_path, "w")
-            cvs_file.write(puzzle)
+            cvs_file.write(puzzle + "\n")
+            if result !="":
+               cvs_file.write(result + "\n")
             cvs_file.close()
         except:
             return ("The file cannot be read")
-
 
 
     def verify_commas(self):
@@ -56,7 +74,6 @@ class Cvs_format:
         size = len(self.cvs)
         for i in range(9, size,10):
             if (self.cvs[i]!= ','):
-                print (self.cvs[i])
                 return False
         return True
 
@@ -80,6 +97,7 @@ class Cvs_format:
                 return True
         return False
 
+
     def get_sudoku_cvs_to_str(self):
         """
         This method return in string format remove the commas
@@ -89,19 +107,16 @@ class Cvs_format:
             return puzzle
         return []
 
-    def get_lines_cvs_file(self, cvs_path):
+
+    def remove_eol(self, puzzle):
         """
-        This method get all the cvs into the file
-        Keyword arguments:
-            cvs_path : cvs path
+        This method remove the end of fole
         """
-        try:
-            cvs_file = open(cvs_path, "r")
-            lines = cvs_file.readlines()
-            cvs_file.close()
-            return lines
-        except:
-            return ("The file cannot be read")
+        size = len(puzzle)-1
+        if puzzle[size]=='\n':
+            puzzle =  puzzle [:-1]
+        self.cvs = puzzle
+        return puzzle
 
     def change_to_cvs_format(self,puzzle, char_empty = '0'):
         """
@@ -110,10 +125,15 @@ class Cvs_format:
         return a string with sudoku in cvs format
 
         """
-        size = len (puzzle)
+        size = len(puzzle)
         if(size >= 81):
+            self.remove_eol(puzzle)
             puzzle = puzzle.replace('0',char_empty)
             puzzle = puzzle.replace('.',char_empty)
             puzzle = puzzle.replace('_',char_empty)
-
-        return puzzle
+            self.cvs = ""
+            for i in range(size):
+                if i in [9,18,27,36,45,54,63,72]:
+                   self.cvs += ','
+                self.cvs += puzzle[i]
+        return self.cvs

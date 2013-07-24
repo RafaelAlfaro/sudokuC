@@ -39,8 +39,8 @@ class PeterAlgorithm:
         values = dict((square_value, self.digits) for square_value in self.squares)
         for square_value, digit in self.get_grid_values(grid).items():
             if digit in self.digits and not self.get_values_solution(values, square_value, digit):
-                return(False)
-        return(values)
+                return False
+        return values
 
     def get_grid_values(self, grid):
         """ Convert grid into a dict of {square: char} with '0' or '.'
@@ -51,7 +51,7 @@ class PeterAlgorithm:
         """
         chars = [column for column in grid if column in self.digits or column in '0.']
         if len(chars) == 81:
-            return(dict(zip(self.squares, chars)))
+            return dict(zip(self.squares, chars))
 
     def get_values_solution(self, values, square_value, digit):
         """ Eliminate all the other values (except digit) from values
@@ -67,9 +67,9 @@ class PeterAlgorithm:
         other_values = values[square_value].replace(digit, '')
         if all(self.get_eliminate_values(values, square_value, auxiliary_digit) \
                for auxiliary_digit in other_values):
-            return(values)
+            return values
         else:
-            return(False)
+            return False
 
     def get_digit_by_reviewing_squares (self, values, square_value, digit):
         """ Function that receives the dictionary with all digits, then moves through the
@@ -177,11 +177,11 @@ class PeterAlgorithm:
         for individual_square_position in range (0, 81):
             value_individual_per_square = puzzle_sort[individual_square_position][1]
             puzzle_solved += str(value_individual_per_square)
-        return(str(puzzle_solved))
+        return str(puzzle_solved)
 
     def get_time(self):
         """	Function that returns the time that a game has been solved by
         the algorithm.
         """
-        return(self.time_solve)
+        return self.time_solve
 

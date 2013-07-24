@@ -7,7 +7,6 @@ class FileTxt:
 
     def define_path(self, file_path):
         """ Function that receives the path where there is the text file.
-
             Keyword arguments:
                 file_path -- path where there is the text file.
         """
@@ -34,8 +33,7 @@ class FileTxt:
             final_string = self.file_content.replace("\n", "")
             if self.get_number_of_characters(final_string) :
                 if self.get_if_is_digit(final_string):
-                    #self.create_txt_file(final_string)
-                    return(final_string)
+                    return final_string
 
     def generate_name_txt_file(self,name_of_file = ""):
         """ This function generate a name for the text file  using the date and time of the
@@ -43,13 +41,13 @@ class FileTxt:
         """
         get_time = time.strftime('%H%M%S%m%d%Y')
         if(self.file_name == ""):
-            self.file_name = "sudoku_"+get_time+".txt"
+            self.file_name = "sudoku_" + get_time + ".txt"
         else:
             self.file_name = name_of_file + "_"
-            self.file_name += get_time+".txt"
+            self.file_name += get_time +".txt"
         return self.file_name
 
-    def create_txt_file(self, content, name_of_file = ""):
+    def create_txt_file(self, puzzle, result="", name_of_file=""):
         """ Create a new text file to save the game in the new format.
             Keyword arguments:
                 content -- Is the game on a string unresolved without \n
@@ -58,8 +56,11 @@ class FileTxt:
         self.generate_name_txt_file(name_of_file)
         path_txt = self.file_path+self.file_name
         try:
+            print (path_txt)
             f = open(path_txt, "w")
-            f.write(content)
+            f.write(puzzle + "\n")
+            if result !="":
+               f.write(result + "\n")
             f.close()
             return True
         except:
@@ -88,8 +89,10 @@ class FileTxt:
             Keyword arguments:
                 content -- Is the game on a string unresolved without \n
         """
-        if content.isdigit(): return True
-        else: return False
+        if content.isdigit():
+             return True
+        else:
+             return False
 
 
 

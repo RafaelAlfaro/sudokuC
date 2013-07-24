@@ -12,7 +12,8 @@ class SudokuStr:
         return(self.long)
 
     def verify_only_num(self):
-        return(self.sudoku_str.isdigit())
+        aux = self.sudoku_str.isdigit()
+        return(aux)
 
     def get_81_characters(self,size = 81):
         """
@@ -48,7 +49,9 @@ class SudokuStr:
                 self.sudoku_str = self.sudoku_str.replace('0',self.char_empty)
                 self.sudoku_str = self.sudoku_str.replace('.',self.char_empty)
                 self.sudoku_str = self.sudoku_str.replace('_',self.char_empty)
-            return(True)
+                return(True)
+            else:
+                return(False)
 
     def put_a_sring(self, sudoku_str,char_empty = '0'):
         """

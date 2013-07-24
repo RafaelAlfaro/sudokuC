@@ -107,5 +107,5 @@ class UnitTestBacktrak(unittest.TestCase):
         self.assertEqual(self.sudoku_matrix, self.new_resolve.convert_str_to_matrix(self.sudoku_str, self.max_row, self.max_col))
 
     
-if __name__ == '__main__':
-    unittest.main()
+#if __name__ == '__main__':
+#    unittest.main()

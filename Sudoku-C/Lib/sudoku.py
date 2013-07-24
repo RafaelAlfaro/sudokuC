@@ -217,7 +217,7 @@ class Sudoku(object):
         if (numbers_zeros >= 41 and numbers_zeros <= 72):
             inserted_zeros = 0
             counter = 0
-            while (inserted_zeros!= numbers_zeros):
+            while (inserted_zeros!= numbers_zeros ):
                 if (numbers_zeros >= 41 and numbers_zeros <= 48):
                         level = 0
                         inserted_zeros = self.generated_next_sudoku(level)

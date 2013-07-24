@@ -54,5 +54,5 @@ class TestString(unittest.TestCase):
         self.assertEqual(str_final, str_to_verify.get_str())
 
 
-if __name__ == '__main__':
-    unittest.main()
+##if __name__ == '__main__':
+##    unittest.main()

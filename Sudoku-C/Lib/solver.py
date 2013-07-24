@@ -43,8 +43,6 @@ class Solver:
             elif (str(cont) in '36'):board = board +'|'
         return board
 
-#############################-Solver-##############################
-
     def solver(self,puzzle,algorithm):
         """
         This method uses the algorithm specified to solve the game
@@ -57,19 +55,15 @@ class Solver:
                 recursivesk = recursive.Recursive(puzzle)
                 self.solution=recursivesk.solve_one_sudoku()
                 self.solve_time = recursivesk.get_time()
-                print(self.human_string(self.solution))
-                print self.solve_time
 
         elif (algorithm =="peter"):
             board = sudokustr.SudokuStr(puzzle)
             if(board.verify_string_to_sudoku()):
                 self.original = board.get_str()
                 puzzle = board.get_str()
-                petersk = peter_algorithm.Peter_algorithm()
+                petersk = peter_algorithm.PeterAlgorithm()
                 self.solution = petersk.get_game_solution (puzzle)
                 self.solve_time = petersk.get_time()
-                print(self.human_string(self.solution))
-                print self.solve_time
 
 
         elif (algorithm =="bactracking"):
@@ -80,17 +74,11 @@ class Solver:
             if(board.verify_string_to_sudoku()):
                 self.original = board.get_str()
                 puzzle = board.get_str()
-
                 bactrack = Resolve(puzzle)
-
                 sudoku_matrix = bactrack.convert_str_to_matrix(puzzle, 9, 9)
                 self.execute = bactrack.resolve(sudoku_matrix)
                 self.solution = bactrack.get_solve_game()
-
-
                 self.solve_time = bactrack.get_time()
-                print(self.human_string(self.solution))
-                print self.solve_time
         else:
             print ("Other algorithm")
 

@@ -1,3 +1,7 @@
+'''
+Created on Jul 20, 2013
+@author: Rafael Alfaro
+'''
 import time
 class Htmlsudoku:
       def __init__(self):
@@ -35,8 +39,7 @@ class Htmlsudoku:
           """
           self.header_start = "<html>\n<head>\n<title>@title</title>\n</head>\n"
           self.body_start = "<body>\n"
-          self.table_begin = "<table summary=\"@caption\" border=@value align=\"center\">"
-          self.table_begin = self.table_begin + "\n<caption>@caption</caption>\n"
+          self.table_begin = "<table summary=\"@caption\" border=@value align=\"center\">\n<caption>@caption</caption>\n"
           self.thead_start = "<thead>\n<tr>\n"
           self.th_column = "<th scope=\"col\" bgcolor=#@color width= 10 align= \"center\">@value</th>\n"
           self.thead_end = "</tr>\n</thead>\n"
@@ -86,7 +89,7 @@ class Htmlsudoku:
           if block in block_8:
             return (self.board_colors[8])
           if block in block_9:
-            return (self.board_colors[9])
+            return self.board_colors[9]
 
 
       def mofify_header(self, title):
@@ -97,7 +100,7 @@ class Htmlsudoku:
           return : the string modified
           """
           html_generated = self.header_start.replace("@title", title)
-          return(html_generated)
+          return html_generated
 
       def modify_table_header(self, caption, borde=1):
           """
@@ -110,7 +113,7 @@ class Htmlsudoku:
           """
           html_generated = self.table_begin.replace("@caption", caption)
           html_generated = html_generated.replace("@value", str(borde))
-          return(html_generated)
+          return html_generated
 
       def modify_th_column(self, color, value):
           """
@@ -122,7 +125,7 @@ class Htmlsudoku:
           """
           html_generated = self.th_column.replace("@color", color)
           html_generated = html_generated.replace("@value", value)
-          return(html_generated)
+          return html_generated
 
       def make_columns(self):
           """
@@ -131,7 +134,7 @@ class Htmlsudoku:
           html_generated = ""
           for column in self.rows:
               html_generated += self.modify_th_column(self.board_colors[0], column)
-          return(html_generated)
+          return html_generated
 
       def generate_table(self, puzzle):
           """
@@ -159,7 +162,7 @@ class Htmlsudoku:
               if(cell in rows_end):
                       html_generated += self.tr_end
 
-          return(html_generated)
+          return html_generated
 
 
       def make_table(self,puzzle, title):
@@ -180,10 +183,10 @@ class Htmlsudoku:
           html_generated += self.generate_table(puzzle)
           html_generated += self.table_end
           html_generated += self.tbody_end
-          return(html_generated)
+          return html_generated
 
 
-      def get_html(self,puzzle,result=""):
+      def get_html(self, puzzle, result=""):
           """
           This method builds the html
           Keyword arguments:
@@ -200,7 +203,7 @@ class Htmlsudoku:
               html_generated += self.make_table(result,"Result")
           html_generated += self.body_end
           html_generated += self.header_end
-          return(html_generated)
+          return html_generated
 
       def generate_name(self, file_name=""):
           """
@@ -218,9 +221,9 @@ class Htmlsudoku:
           else:
              file_name += "_"
              file_name = file_name + get_time + ".html"
-          return(file_name)
+          return file_name
 
-      def html_to_file(self, html_result, file_path, name = ""):
+      def html_to_file(self, html_result, file_path, name=""):
           """
           This method creates the html in the path specified.
           Keyword arguments:
@@ -236,4 +239,4 @@ class Htmlsudoku:
               f.write(html_result)
               f.close
           except:
-                 return("The file cannot be written")
+                 return "The file cannot be written"

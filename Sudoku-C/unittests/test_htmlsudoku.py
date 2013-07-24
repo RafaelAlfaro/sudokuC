@@ -91,5 +91,5 @@ class Test_Htmlsudoku(unittest.TestCase):
         self.assertEqual("The file cannot be written",result)
 
 
-if __name__ == '__main__':
-    unittest.main()
+#if __name__ == '__main__':
+#    unittest.main()

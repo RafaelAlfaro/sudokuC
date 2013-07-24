@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <configuration>
 	<default name="Default_conf">
-		<algorithm>backtraking</algorithm>
+		<algorithm>recursive</algorithm>
 		<difficulty>Easy</difficulty>
-		<solver_output_type>cvs</solver_output_type>
-		<path_output>c:\\temp002</path_output>
+		<solver_output_type>html</solver_output_type>
+		<path_output>outputs</path_output>
 	</default>
 	<levels>
-		<level id="0" max="88" min="20" name="Easy" />
-		<level id="1" max="49" min="46" name="Medium" />
-		<level id="2" max="47" min="65" name="Hard" />
+		<level id="0" max="45" min="40" name="Easy" />
+		<level id="1" max="46" min="50" name="Medium" />
+		<level id="2" max="51" min="65" name="Hard" />
 	</levels>
 </configuration>

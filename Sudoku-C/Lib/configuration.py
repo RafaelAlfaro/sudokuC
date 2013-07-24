@@ -42,38 +42,28 @@ class Configuration:
         """
 
         self.name_of_file = file_name
-        self.path_of_file = "..\\configurations\\"
+        self.path_of_file = "configurations\\"
         self.algorithm = "Backtraking"
         self.difficulty = "Easy"
         self.id = "1"
         self.min = "46"
         self.max = "49"
         self.solver_output_type = "txt"
-        self.output_path = "..\\outputs\\"
+        self.output_path = "outputs"
         self.name = "configuration"
 
-    def print_configuration (self):
+    def get_max_and_min_difficulty(self):
         """
-        This method prints the variables of object
-        algorithm - Algorithm used
-        difficulty - Difficulty used
-        id - id of level
-        min - minimums hold in the board
-        max - Maximus hold in the board
-        solver_output_type - type of output (txt or cvs)
-        output_path - the path of output
+        This method gets the min and max of zeros to generate the puzzle
 
         """
-        print("Name : ", self.name_of_file)
-        print("Path of scrypt :", self.path_of_file)
-        print("Algorithm:", self.algorithm)
-        print("Difficulty:", self.difficulty)
-        print("ID difficulty:", self.id)
-        print("Value minimus :", self.min)
-        print("Value maximus :", self.max)
-        print("Solver_output_type", self.solver_output_type)
-        print("Ouput folder", self.output_path)
+        return self.min, self.max
 
+    def get_solver_output_type(self):
+        """
+        This method gets solved output file format
+        """
+        return self.solver_output_type
 
     def verify_if_config_file_exist(self):
         """
@@ -278,6 +268,14 @@ class Configuration:
             value = node.find(tag).text
         return value
 
+    def load_xml_data(self,root=""):
+        self.algorithm = self.get_value_from_xml(root,"algorithm")
+        self.difficulty = self.get_value_from_xml(root,"difficulty")
+        self.solver_output_type = self.get_value_from_xml(root,"solver_output_type")
+        self.output_path = self.get_value_from_xml(root,"path_output")
+        self.get_current_level_values_form_xml(self.difficulty)
+
+
     def verify_modif_tag(self, tag, value):
         """
         This method verifies Tag modification, it returns True if the modification was successfully
@@ -292,4 +290,47 @@ class Configuration:
            return True
         else:
             return False
+
+    def get_levels(self):
+        """
+        This mathod return a matrix with the levels in the xml
+        """
+        file_path = self.get_configuration_path()
+        root = self.read_xml(file_path)
+        lista = ""
+        matrix = []
+        for levels in root.iter('level'):
+            xml_read = levels.attrib
+            id_xml = xml_read['id']
+            name_xml = xml_read['name']
+            min_xml = xml_read['min']
+            max_xml = xml_read['max']
+            list_tmp = id_xml, name_xml, min_xml, max_xml
+            matrix.append(list_tmp)
+        return matrix
+
+    def get_current_level_values_form_xml(self, level):
+        """
+        This method gets the values of current level
+        level : the level to load form xml
+        """
+        level_matrix = self.get_levels()
+        for i in range(len(level_matrix[0])-1):
+            if level_matrix[i][1] == level:
+               self.id = level_matrix[i][0]
+               self.min = level_matrix[i][2]
+               self.max = level_matrix[i][3]
+               break
+    def get_output_path(self):
+        """
+        This method get the output path form object
+        """
+        print self.output_path
+        return self.output_path
+
+    def get_algorithm_to_solve(self):
+        """
+        This method get algorithm to solve the sudoku
+        """
+        return self.algorithm
 
